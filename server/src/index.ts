@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express"
 import mongoose from 'mongoose';
 
+import * as dotenv from 'dotenv' 
+dotenv.config()
+
 import Deck from "./Models/Deck"
 
 const PORT = 5000
@@ -23,7 +26,7 @@ app.post("/decks", async (req: Request, res: Response) => {
     res.json(createdDeck)
 })
 
-const db = mongoose.connect("mongodb+srv://React-Projects:slnavZmmaadVCX7X@projects.poujrym.mongodb.net/?retryWrites=true&w=majority").then(() => {
+const db = mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
     app.listen(PORT)
     console.log(`Listening on Port:${PORT}`)
 })
