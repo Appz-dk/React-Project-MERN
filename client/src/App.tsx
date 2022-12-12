@@ -3,9 +3,14 @@ import "./App.css";
 
 const API_URL = "http://localhost:5000";
 
+type TDeck = {
+  _id: string;
+  title: string;
+};
+
 function App() {
   const [title, setTitle] = useState("");
-  const [decks, setDecks] = useState([]);
+  const [decks, setDecks] = useState<TDeck[]>([]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
@@ -24,8 +29,6 @@ function App() {
     fetchDecks(`${API_URL}/decks`);
   }, []);
 
-  console.log(decks);
-
   const handleDeckSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Submit Form to backend
@@ -43,6 +46,11 @@ function App() {
 
   return (
     <div className="App">
+      <ul className="decks">
+        {decks.map((deck) => (
+          <li key={deck._id}>{deck.title}</li>
+        ))}
+      </ul>
       <form onSubmit={handleDeckSubmit}>
         <label htmlFor="deck-title">Deck Title</label>
         <input id="deck-title" value={title} onChange={handleTitleChange} />
