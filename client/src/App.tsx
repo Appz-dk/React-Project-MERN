@@ -4,6 +4,7 @@ import { createDeck } from "./api/createDeck";
 import { deleteDeck } from "./api/deleteDeck";
 import { getDecks, TDeck } from "./api/getDecks";
 import "./App.css";
+import Decks from "./components/Decks";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -43,19 +44,7 @@ function App() {
   return (
     <div className="App">
       <ul className="decks">
-        {/* TODO: Create seperate Deck component */}
-        {decks.map((deck) => (
-          <li key={deck._id}>
-            <button
-              onClick={() => {
-                handleDeleteDeck(deck._id);
-              }}
-            >
-              X
-            </button>
-            <Link to={`decks/${deck._id}`}>{deck.title}</Link>
-          </li>
-        ))}
+        <Decks decks={decks} onClick={handleDeleteDeck} />
       </ul>
       <form onSubmit={handleDeckSubmit}>
         <label htmlFor="deck-title">Deck Title</label>

@@ -8,6 +8,7 @@ dotenv.config()
 import { getDecksController } from "./Controllers/getDecksController";
 import { createDeckController } from "./Controllers/createDeckController";
 import { deleteDeckController } from "./Controllers/deleteDeckController";
+import { createCardForDeckController } from "./Controllers/createCardForDeckController";
 
 const PORT = 5000
 
@@ -23,10 +24,10 @@ app.use(express.json())
 app.use(cors(corsOptions))
 
 app.get("/decks", getDecksController)
-
 app.post("/decks", createDeckController)
-
 app.delete("/decks/:deckId", deleteDeckController)
+
+app.post("/decks/:deckId/cards", createCardForDeckController)
 
 const db = mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
     app.listen(PORT)
