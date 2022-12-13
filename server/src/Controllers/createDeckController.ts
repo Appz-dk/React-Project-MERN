@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import Deck from "../Models/Deck"
 
-export const createDeck = async (req: Request, res: Response) => {
+export const createDeckController = async (req: Request, res: Response) => {
     // const {title} = req.body
 
     // Create new Deck instance

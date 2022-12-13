@@ -5,10 +5,9 @@ import cors from "cors"
 import * as dotenv from 'dotenv' 
 dotenv.config()
 
-import Deck from "./Models/Deck"
-import { getDecks } from "./Controllers/getDecksController";
-import { createDeck } from "./Controllers/createDeckController";
-import { deleteDeck } from "./Controllers/deleteDeckController";
+import { getDecksController } from "./Controllers/getDecksController";
+import { createDeckController } from "./Controllers/createDeckController";
+import { deleteDeckController } from "./Controllers/deleteDeckController";
 
 const PORT = 5000
 
@@ -23,11 +22,11 @@ const corsOptions = {
 app.use(express.json())
 app.use(cors(corsOptions))
 
-app.get("/decks", getDecks)
+app.get("/decks", getDecksController)
 
-app.post("/decks", createDeck)
+app.post("/decks", createDeckController)
 
-app.delete("/decks/:deckId", deleteDeck)
+app.delete("/decks/:deckId", deleteDeckController)
 
 const db = mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
     app.listen(PORT)
