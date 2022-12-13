@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { TDeck } from "../api/getDecks";
 import { useParams } from "react-router-dom";
 import { createCard } from "../api/createCard";
+import { deleteCard } from "../api/deleteCard";
 import { getDeck } from "../api/getDeck";
+import { TDeck } from "../api/getDecks";
 import "../App.css";
-import Decks from "./Decks";
 import Cards from "./Cards";
 
 const Deck = () => {
   const { deckId } = useParams();
+  const [deck, setDeck] = useState<TDeck | undefined>(undefined);
   const [text, setText] = useState("");
   const [cards, setCards] = useState<string[]>([]);
 
@@ -17,36 +18,40 @@ const Deck = () => {
     setText(text);
   };
 
-  // Fetch all Decks from database on page mount
+  // Fetch Deck from database on page mount
   useEffect(() => {
-    async function fetchDecks() {
-      const { cards: databaseCards } = await getDeck(deckId || "");
-      setCards(databaseCards);
+    async function fetchDeck() {
+      if (!deckId) return;
+      const deck = await getDeck(deckId);
+      setDeck(deck);
+      setCards(deck.cards);
     }
-    fetchDecks();
-  }, []);
+    fetchDeck();
+  }, [deckId]);
 
   const handleCardSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Create new deck in database
+    // Create new card in database
     const newCard = await createCard(text, deckId || ""); // Improve Type ??
-    // Update decks state to rerender page
+    // Update cards state to rerender page
     setCards((cards) => [...cards, newCard]);
-    // // Clear title state
+    // // Clear text state
     setText("");
   };
 
-  // const handleDeleteDeck = async (deckId: string) => {
-  //   // Delete deck from database
-  //   await deleteDeck(deckId);
-  //   // Optimistic rerendering of page
-  //   setDecks((decks) => decks.filter((deck) => deck._id !== deckId));
-  // };
+  const handleDeleteCard = async (deckId: string, index: number) => {
+    // Delete deck from database
+    const deck = await deleteCard(deckId, index);
+    // Optimistic rerendering of page
+    setCards(deck.cards);
+    // Update deck state to altered deck
+    setDeck(deck);
+  };
 
   return (
     <div className="App">
       <ul className="decks">
-        <Cards cards={cards} deckId={deckId!} />
+        <Cards cards={cards} deckId={deckId!} onClick={handleDeleteCard} />
       </ul>
       <form onSubmit={handleCardSubmit}>
         <label htmlFor="card-text">Card Text</label>

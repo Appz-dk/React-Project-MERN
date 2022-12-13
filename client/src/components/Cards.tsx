@@ -1,15 +1,15 @@
 type TProps = {
   cards: string[];
   deckId: string;
-  //   onClick: (id: string) => {};
+  onClick: (id: string, index: number) => {};
 };
 
 const Cards = (props: TProps) => {
   return (
     <>
-      {props.cards.map((card: string) => (
+      {props.cards.map((card: string, index) => (
         <li key={props.deckId}>
-          {/* <button onClick={() => props.onClick(deckId)}>X</button> */}
+          <button onClick={() => props.onClick(props.deckId, index)}>X</button>
           {card}
         </li>
       ))}
