@@ -9,6 +9,7 @@ import { getDecksController } from "./Controllers/getDecksController";
 import { createDeckController } from "./Controllers/createDeckController";
 import { deleteDeckController } from "./Controllers/deleteDeckController";
 import { createCardForDeckController } from "./Controllers/createCardForDeckController";
+import { getDeckController } from "./Controllers/getDeckController";
 
 const PORT = 5000
 
@@ -27,6 +28,7 @@ app.get("/decks", getDecksController)
 app.post("/decks", createDeckController)
 app.delete("/decks/:deckId", deleteDeckController)
 
+app.get("/decks/:deckId", getDeckController)
 app.post("/decks/:deckId/cards", createCardForDeckController)
 
 const db = mongoose.connect(`${process.env.MONGO_URL}`).then(() => {

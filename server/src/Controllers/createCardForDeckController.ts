@@ -12,6 +12,6 @@ export const createCardForDeckController = async (req: Request, res: Response) =
     deck.cards.push(text)
     // Remember to save
     deck.save()
-    // Return saved Deck to user
-    res.json(deck)
+    // Return saved card to user
+    res.json(deck.cards[deck.cards.length - 1])
 }
