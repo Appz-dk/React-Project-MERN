@@ -6,6 +6,9 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 import Deck from "./Models/Deck"
+import { getDecks } from "./Controllers/getDecksController";
+import { createDeck } from "./Controllers/createDeckController";
+import { deleteDeck } from "./Controllers/deleteDeckController";
 
 const PORT = 5000
 
@@ -20,34 +23,11 @@ const corsOptions = {
 app.use(express.json())
 app.use(cors(corsOptions))
 
-app.get("/decks", async (req: Request, res: Response) => {
-    // Get all decks from database
-    const decks = await Deck.find()
-    // Send all decks back to UI
-    res.json(decks)
-})
+app.get("/decks", getDecks)
 
-app.post("/decks", async (req: Request, res: Response) => {
-    // const {title} = req.body
+app.post("/decks", createDeck)
 
-    // Create new Deck instance
-    const newDeck = new Deck({
-        title: req.body.title
-    });
-    // Save
-    const createdDeck = await newDeck.save()
-    // Return saved Deck to user
-    res.json(createdDeck)
-})
-
-app.delete("/decks/:deckId", async (req: Request, res: Response) => {
-    // Get deckId from url
-    const {deckId} = req.params
-    // Delete deck from database
-    const deletedDeck = await Deck.findByIdAndDelete(deckId)
-    // Send back deleted deck
-    res.json(deletedDeck)
-} )
+app.delete("/decks/:deckId", deleteDeck)
 
 const db = mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
     app.listen(PORT)
