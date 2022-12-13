@@ -49,9 +49,21 @@ body {
   background-color: white;
   border: 1px solid black;
   border-radius: 10px;
+  position: relative;
 }
 
-/* .decks li:hover {
-  cursor: pointer;
-  background-color: #e3e3e3;
-} */
+.decks li button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 1.2rem;
+  height: 1.2rem;
+  padding: 0;
+  border: none;
+  font-size: .8rem;
+  background-color: white;
+}
+
+.decks li button:hover {
+  border: 1px solid #393939
+}
