@@ -1,18 +1,18 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #393939;
 }
 
 .App {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 2rem;
+  height: 90vh;
+  width: 50rem;
 }
 
 .App form {
@@ -66,4 +66,17 @@ body {
 
 .decks li button:hover {
   border: 1px solid #393939
+}
+
+li.card {
+  font-size: 0.9rem;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: .8rem 0;
+  margin-bottom: 1.2rem;
 }

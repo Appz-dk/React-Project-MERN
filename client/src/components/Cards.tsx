@@ -8,7 +8,7 @@ const Cards = (props: TProps) => {
   return (
     <>
       {props.cards.map((card: string, index) => (
-        <li key={props.deckId}>
+        <li className="card" key={props.deckId}>
           <button onClick={() => props.onClick(props.deckId, index)}>X</button>
           {card}
         </li>
