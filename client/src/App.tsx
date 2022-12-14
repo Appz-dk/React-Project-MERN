@@ -42,9 +42,14 @@ function App() {
 
   return (
     <div className="App">
-      <ul className="decks">
-        <Decks decks={decks} onClick={handleDeleteDeck} />
-      </ul>
+      <h1>Your Decks</h1>
+      {decks.length > 0 ? (
+        <ul className="decks">
+          <Decks decks={decks} onClick={handleDeleteDeck} />
+        </ul>
+      ) : (
+        <p className="no-decks">No decks yet... Start creating some!</p>
+      )}
       <form onSubmit={handleDeckSubmit}>
         <label htmlFor="deck-title">Deck Title</label>
         <input id="deck-title" value={title} onChange={handleTitleChange} />

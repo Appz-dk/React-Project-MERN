@@ -1,0 +1,12 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.header a {
+    color: black;
+    font-weight: 500;
+}

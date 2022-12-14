@@ -15,6 +15,11 @@ body {
   width: 50rem;
 }
 
+.App h1 {
+  color: white;
+  font-size: 2.2rem;
+}
+
 .App form {
   display: flex;
   justify-content: center;
@@ -72,11 +77,8 @@ li.card {
   font-size: 0.9rem;
 }
 
-.header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: .8rem 0;
-  margin-bottom: 1.2rem;
+
+.App .no-cards,
+.App .no-decks {
+  color: white;
 }

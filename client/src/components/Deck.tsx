@@ -50,9 +50,16 @@ const Deck = () => {
 
   return (
     <div className="App">
-      <ul className="decks">
-        <Cards cards={cards} deckId={deckId!} onClick={handleDeleteCard} />
-      </ul>
+      <h1>{deck?.title}</h1>
+
+      {cards.length > 0 ? (
+        <ul className="decks">
+          <Cards cards={cards} deckId={deckId!} onClick={handleDeleteCard} />
+        </ul>
+      ) : (
+        <p className="no-cards">No cards yet... Start creating some!</p>
+      )}
+
       <form onSubmit={handleCardSubmit}>
         <label htmlFor="card-text">Card Text</label>
         <input id="card-text" value={text} onChange={handleTextChange} />
